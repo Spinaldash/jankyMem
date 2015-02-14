@@ -1,3 +1,35 @@
-h1{
-  color :red;
+body {
+  // background: url('/images/MK_WP.jpg') no-repeat center center fixed;
+  // background-size: cover;
+  background-color: black;
+  font-family: monospace;
+}
+#cards{
+  .card {
+    background-color: white;
+    display: inline-block;
+    margin: 2px;
+    padding: 1px;
+    width: 160px;
+    text-align: center;
+
+    &> div:first-child{
+      border: 0px solid black;
+      width: 160px;
+      height: 220px;
+      margin: 0px;
+      background-size: cover;
+    }
+
+    &> div:nth-child(2){
+
+    }
+  }
+}
+.title {
+  font-family: fantasy;
+}
+
+#timer{
+  color: white;
 }
