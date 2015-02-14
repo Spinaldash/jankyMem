@@ -13,20 +13,17 @@ var cards = [];
 var timer = 60;
 var intervalID;
 
-function gameStart(){
+function gameStart() {
   intervalID = setInterval(timerTime, 1000)
 }
 
-function timerTime(){
+function timerTime() {
   timer--;
   console.log(timer);
   $('#timer').text(timer);
   if (timer === 0) {
     window.clearInterval(intervalID);
   }
-
-
-
 }
 
 function createCards() {
@@ -43,13 +40,24 @@ function createCards() {
 
   cards.push(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10);
   cards.push(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10);
+  cards = _.shuffle(cards);
 }
 
 function paintCards() {
 
   cards.forEach(function(card) {
+
+    var $flipContainer = $('<div>');
+    $flipContainer.addClass('flip-container');
+
+    var $flipper =  $('<div>');
+    $flipper.addClass('flipper');
+
+    var $front = $('<div>');
+    $front.addClass('front');
+
     var $outer = $('<div>');
-    $outer.addClass('card');
+    $outer.addClass('card back');
 
     var $img = $('<div>');
     $img.css('background-image', 'url("' + card.image + '")');
@@ -59,6 +67,9 @@ function paintCards() {
     $name.addClass('name title');
 
     $outer.append($img, $name);
-    $('#cards').append($outer);
+    $flipper.append($front, $outer);
+    $flipContainer.append($flipper);
+    $('.gameMat').append($flipContainer);
+
   });
 }

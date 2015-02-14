@@ -1,4 +1,5 @@
 /* global _ */
+/*global Card */
 /* exported Fighter */
 'use strict';
 
