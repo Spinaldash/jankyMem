@@ -12,10 +12,14 @@ function init() {
 
 var cards = [];
 var flipped = [];
-var timer = 5;
+var timer = 60;
 var intervalID;
 
 function flippyFlip() {
+  if (!intervalID) {
+    alert('You must press start before you can flip cards!');
+    return;
+  }
   if (flipped.length === 2) { //reset if you have 2 cards flipped
     $('.flipped').removeClass('flipped') // unflip unmatched cards
     flipped = [];
@@ -38,10 +42,21 @@ function checkMatches() {
         $('.flipped').removeClass('flipped');
       }
   }
+  checkVictory();
+}
+
+function checkVictory() {
+  if ($('.matched').length === 20) { // If you match 20 cards, you win
+    window.clearInterval(intervalID);
+    alert('Congratulations! You won! Tweet me #TreMagnifique @Spinaldash! You took: ' + eval(60 - timer) + 'seconds. \n\n Thank you for playing!');
+
+  }
 }
 
 function gameStart() {
+  $('#start').attr('disabled');
   intervalID = setInterval(timerTime, 1000)
+
 }
 
 function timerTime() {
@@ -52,6 +67,8 @@ function timerTime() {
     alert("Time's up! You did great, but there is still room for improvement!")
     $('.flipped').removeClass('flipped') // unflip unmatched cards
     $('.matched').removeClass('matched') // unflip matched cards
+
+
     window.clearInterval(intervalID);
   }
 }
