@@ -7,11 +7,38 @@ function init() {
   createCards();
   paintCards();
   $('#start').click(gameStart);
+  $('.flipper').click(flippyFlip);
 }
 
 var cards = [];
-var timer = 60;
+var flipped = [];
+var timer = 5;
 var intervalID;
+
+function flippyFlip() {
+  if (flipped.length === 2) { //reset if you have 2 cards flipped
+    $('.flipped').removeClass('flipped') // unflip unmatched cards
+    flipped = [];
+  }
+
+  if (!$(this).hasClass('flipped')) { //if the card is unflipped, flip it and add to flipped array
+    this.classList.add('flipped');
+    flipped.push($(this).find('.name').text());
+    console.log('ran FlippityFlip');
+  } else {
+    console.log('this card is flipped');
+  }
+  checkMatches();
+}
+
+function checkMatches() {
+  if (flipped.length === 2) { // check if 2 cards are flipped
+    if (flipped[0] === flipped[1]) { //check if the 2 cards match
+        $('.flipped').addClass('matched'); // change cards from flipped to matched
+        $('.flipped').removeClass('flipped');
+      }
+  }
+}
 
 function gameStart() {
   intervalID = setInterval(timerTime, 1000)
@@ -22,6 +49,9 @@ function timerTime() {
   console.log(timer);
   $('#timer').text(timer);
   if (timer === 0) {
+    alert("Time's up! You did great, but there is still room for improvement!")
+    $('.flipped').removeClass('flipped') // unflip unmatched cards
+    $('.matched').removeClass('matched') // unflip matched cards
     window.clearInterval(intervalID);
   }
 }
@@ -57,7 +87,8 @@ function paintCards() {
     $front.addClass('front');
 
     var $outer = $('<div>');
-    $outer.addClass('card back');
+    $outer.addClass('back card');
+    $outer.css('background-image', 'url("' + card.image + '")');
 
     var $img = $('<div>');
     $img.css('background-image', 'url("' + card.image + '")');

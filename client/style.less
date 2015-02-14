@@ -26,34 +26,41 @@ body {
 
     }
   }
-}
+}s
 .title {
   font-family: fantasy;
 }
 
-#timer{
+#timer {
   color: white;
+  font-family: monospace;
+  padding: 5px auto;
+  font-size: 50px;
+  text-align: center
 }
 
-.testcard {
-  width: 100px;
-  height: 100px;
-  border 2px dashed white;
+#start {
+  height: auto;
+  font-size: 25px;
+  border-radius: 15px;
+  margin: auto 10px;
 }
+
 
 ///FLIP CSS
 /* entire container, keeps perspective */
 .flip-container {
   perspective: 1000;
+  display: inline-block;
 }
   /* flip the pane when hovered */
-  .flip-container:hover .flipper, .flip-container.hover .flipper {
+  .flipped, .matched {
     transform: rotateY(180deg);
   }
 
 .flip-container, .front, .back {
-  width: 320px;
-  height: 480px;
+  width: 220px;
+  height: 300px;
 }
 
 /* flip speed goes here */
@@ -76,6 +83,8 @@ body {
 /* front pane, placed above back */
 .front {
   z-index: 2;
+  background: url('http://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg');
+  background-size: cover;
   /* for firefox 31 */
   transform: rotateY(0deg);
 }
