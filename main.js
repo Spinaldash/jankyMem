@@ -8,6 +8,8 @@ function init() {
   paintCards();
   $('#start').click(gameStart);
   $('.flipper').click(flippyFlip);
+  $('.flipper').on('click', flippyFlip);
+  $('.flipper').on('tap', flippyFlip);
 }
 
 var cards = [];
